@@ -6,16 +6,19 @@ package awesomesauceproject;
 
 /**
  *
- * @author thsun4006
+ * @author anzha8199
  */
-public class windowQuiz extends javax.swing.JFrame {
+public class windowResults extends javax.swing.JFrame {
+    windowQuiz quiz;
+    
     windowMainMenu menu;
-    private windowResults windowResults;
+    
     /**
-     * Creates new form Quiz
+     * Creates new form windowResults
      */
-    public windowQuiz(windowMainMenu m) {
+    public windowResults(windowQuiz q, windowMainMenu m) {
         initComponents();
+        quiz = q;
         menu = m;
     }
 
@@ -44,38 +47,30 @@ public class windowQuiz extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(153, 153, 153)
+                .addGap(145, 145, 145)
                 .addComponent(jButton1)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(145, Short.MAX_VALUE)
+                .addContainerGap(147, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(132, 132, 132))
+                .addGap(130, 130, 130))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (windowResults == null) {
-            windowResults = new windowResults(this, menu);
-        }
-        
-    windowResults.setVisible(true);
+        menu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    
-    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
+
 }
