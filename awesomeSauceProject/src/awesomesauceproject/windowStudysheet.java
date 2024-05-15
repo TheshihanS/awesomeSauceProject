@@ -4,18 +4,41 @@
  */
 package awesomesauceproject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 /**
  *
  * @author thsun4006
  */
 public class windowStudysheet extends javax.swing.JFrame {
     windowMainMenu menu;
+    
+    String studySheet = "";
+    
     /**
      * Creates new form Studysheets
      */
+    
     public windowStudysheet(windowMainMenu m) {
         initComponents();
         menu = m;
+        
+        try {
+            File f = new File("src/awesomesauceproject/studySheet.txt");
+            Scanner s = new Scanner(f);
+            
+            while(s.hasNextLine()) {
+                studySheet = studySheet + s.nextLine() + "\n";
+            }
+            
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: " + e);
+        }
+        
+        System.out.println(studySheet);
+        
     }
 
     /**

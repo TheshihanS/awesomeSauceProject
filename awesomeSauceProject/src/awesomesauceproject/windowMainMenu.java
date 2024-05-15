@@ -12,6 +12,7 @@ public class windowMainMenu extends javax.swing.JFrame {
     
     private windowQuiz windowQuiz;
     private windowStudysheet windowStudy;
+    
     /**
      * Creates new form mainMenu
      */
@@ -135,6 +136,7 @@ public class windowMainMenu extends javax.swing.JFrame {
                 new windowMainMenu().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

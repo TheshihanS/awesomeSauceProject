@@ -15,6 +15,19 @@ public class Question {
     protected int rightAnswer; // the number of the right answer
     
     // CONSTRUCTOR
+    
+    /**
+     * a blank question constructor
+     */
+    public Question() {
+        this.question = "";
+        this.possibleAnswer1 = "";
+        this.possibleAnswer2 = "";
+        this.possibleAnswer3 = "";
+        this.possibleAnswer4 = "";
+        this.rightAnswer = 0;
+    }
+    
     /**
      * constructor to instantiate a question object
      * @param question - the question
@@ -113,6 +126,6 @@ public class Question {
      * @return - the returned question in string format
      */
     public String toString() {
-        return "Question: " + this.question + "\n1." + this.possibleAnswer1 + "\n2." + this.possibleAnswer2 + "\n3." + this.possibleAnswer3 + "\n4." + this.possibleAnswer4 + "\nAnswer: " + this.rightAnswer;
+        return "Question: " + this.question + "\n1. " + this.possibleAnswer1 + "\n2. " + this.possibleAnswer2 + "\n3. " + this.possibleAnswer3 + "\n4. " + this.possibleAnswer4 + "\nAnswer: " + this.rightAnswer;
     }
 }

@@ -1,0 +1,60 @@
+What is a Gantt Chart?
+Helps project managers to help assign jobs to each employee, ensuring each employee knows their task in the wider project
+Helps project managers to visualize, schedule, and track scheduled as well as actual progress of projects
+Helps project managers to manage the progression of work as the project progresses
+Helps project managers to help improve moral among the employees
+2
+What is the primary benefit of project management?
+Helps organization to ensure the project runs quickly and smoothly
+Ensures that employees don't become to rowdy and cause a riot
+Helps avoid strikes
+Boosts the economy
+1
+How can you share code with collaborators?
+Github
+Email
+USB
+All of the above
+4
+What phase of development cost the most?
+Maintenance
+Implementation
+Integration
+Design
+1
+During what phase does testing occur in?
+Analysis
+Design
+Implementation
+Maintenance
+3
+Who invented the waterfall model?
+Dr. James Worthy
+Dr. Winston Royce
+Dr. Theshihan Suntharampillai
+Dr. George Washington
+2
+What does SDLC stand for?
+Software development lytic cycle
+Software drive large computer
+Software development life cycle
+Software development linux computer
+3
+What does UML stand for?
+Ultra Machine Learning
+Ultimate Machine Language
+Unified Machine Language
+Unified Modeling Language
+4
+When are mistakes cheaper to fix?
+Earlier in the SLDC
+Later in the SLDC
+There is no difference for when in the SLDC
+None of the above
+1
+What are some good measures of success?
+The project solves what it was meant to solve
+It is easy to maintain and administer
+It is scalable to meet the needs of the client
+All of the above
+4

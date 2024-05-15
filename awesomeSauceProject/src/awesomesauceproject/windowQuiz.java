@@ -4,6 +4,10 @@
  */
 package awesomesauceproject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 /**
  *
  * @author thsun4006
@@ -11,12 +15,45 @@ package awesomesauceproject;
 public class windowQuiz extends javax.swing.JFrame {
     windowMainMenu menu;
     private windowResults windowResults;
+    
+    Question q1 = new Question(); // question object
+    Question[] questionArray = new Question[10]; // question array
+    
     /**
      * Creates new form Quiz
      */
+    
     public windowQuiz(windowMainMenu m) {
         initComponents();
         menu = m;
+        
+        // reading question file and adding question objects into a question array
+        try{
+            File f = new File("src/awesomesauceproject/questions.txt");
+            Scanner s = new Scanner(f);
+            String question;
+            String a1;
+            String a2;
+            String a3;
+            String a4;
+            int answerNum;
+            
+            // reading file
+            for (int i = 0; i < questionArray.length; i++) {
+                question = s.nextLine();
+                a1 = s.nextLine();
+                a2 = s.nextLine();
+                a3 = s.nextLine();
+                a4 = s.nextLine();
+                answerNum = Integer.parseInt(s.nextLine());
+                
+                q1 = new Question(question, a1, a2, a3, a4, answerNum); // instantiating question object
+                questionArray[i] = q1; // putting question object into question array
+            }
+            
+        } catch(FileNotFoundException e) {
+            System.out.println("Error: " + e);
+        }
     }
 
     /**
@@ -68,10 +105,10 @@ public class windowQuiz extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
-    
     
     
 
