@@ -1,8 +1,12 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ Anthony Zhang, Eric Donner, Theshihan Suntharampillai
+ May 16, 2024
+ awesomeSauceProject
  */
+
 package awesomesauceproject;
+
+import java.text.DecimalFormat;
 
 /**
  *
@@ -10,8 +14,34 @@ package awesomesauceproject;
  */
 public class windowResults extends javax.swing.JFrame {
     windowQuiz quiz;
-    
     windowMainMenu menu;
+    
+    int[] userChoices = windowQuiz.getChoices(); // the user's choices
+    Question[] questionArray = windowQuiz.getQuestions(); // the array with questions
+    
+    DecimalFormat percent = new DecimalFormat("##0.00%"); // used for user's percent score
+    
+    public String results(Question[] questionArray, int[] choices) {
+        int[] correctAnswers = new int[10]; // holds all of the right answers
+        
+        // putting all of the right answers from question array into the correct answer array
+        for (int i = 0; i < questionArray.length; i++) {
+            correctAnswers[i] = questionArray[i].getRightAnswer();
+        }
+        
+        // calculating user's score
+        int userScore = 0; // the user's score
+        for (int i = 0; i < correctAnswers.length; i++) { // check if user's answers are right
+            if (choices[i] == correctAnswers[i]) {
+                userScore++; // add one to user's score
+            }
+        }
+        
+        double finalScore = (double) userScore / 10.0; // percent score
+        
+        // message to display to user
+        return "Congratulations for completing the quiz!\nYou got " + userScore + " questions right!\nAs a percent this is " + percent.format(finalScore);
+    }
     
     /**
      * Creates new form windowResults
@@ -20,6 +50,8 @@ public class windowResults extends javax.swing.JFrame {
         initComponents();
         quiz = q;
         menu = m;
+        
+        jTextArea1.setText(results(questionArray, userChoices)); // display the user's results
     }
 
     /**
@@ -32,15 +64,28 @@ public class windowResults extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Back to Main Menu");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Quiz Results");
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jTextArea1.setRows(5);
+        jTextArea1.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -48,21 +93,36 @@ public class windowResults extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(145, 145, 145)
-                .addComponent(jButton1)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 98, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(147, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(59, 59, 59)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(130, 130, 130))
+                .addGap(33, 33, 33))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // back to main menu button
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // if button is pressed, go back to main menu
         menu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -71,6 +131,9 @@ public class windowResults extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
 }

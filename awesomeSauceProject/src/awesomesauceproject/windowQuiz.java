@@ -1,7 +1,9 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+Anthony Zhang, Eric Donner, Theshihan Suntharampillai
+5/16/2024
+Quiz window for study program
  */
+
 package awesomesauceproject;
 
 import java.io.File;
@@ -13,11 +15,33 @@ import java.util.Scanner;
  * @author thsun4006
  */
 public class windowQuiz extends javax.swing.JFrame {
+    // variables for switching windows
     windowMainMenu menu;
     private windowResults windowResults;
+    // global variable so that we can create a method to bring this array into another class, array to hold question object
+    static Question[] questionArray = new Question[10]; // question array
+    // same thing as previous global variable but for the user choice
+    static int[] userChoices = new int[10];
+    // global variable to keep index of the question the user is on
+    static int index = 0;
     
-    Question q1 = new Question(); // question object
-    Question[] questionArray = new Question[10]; // question array
+    /**
+     * returns the userChoices array
+     * @return - userChoices array
+     */
+    
+    public static int[] getChoices() {
+        return userChoices;
+    }
+    
+    /**
+     * returns the question array
+     * @return - question array
+     */
+    
+    public static Question[] getQuestions() {
+        return questionArray;
+    }
     
     /**
      * Creates new form Quiz
@@ -29,8 +53,10 @@ public class windowQuiz extends javax.swing.JFrame {
         
         // reading question file and adding question objects into a question array
         try{
+            // file and scanner object
             File f = new File("src/awesomesauceproject/questions.txt");
             Scanner s = new Scanner(f);
+            // declare variables to create question object
             String question;
             String a1;
             String a2;
@@ -40,16 +66,23 @@ public class windowQuiz extends javax.swing.JFrame {
             
             // reading file
             for (int i = 0; i < questionArray.length; i++) {
+                // reading the variables from the file
                 question = s.nextLine();
                 a1 = s.nextLine();
                 a2 = s.nextLine();
                 a3 = s.nextLine();
                 a4 = s.nextLine();
                 answerNum = Integer.parseInt(s.nextLine());
-                
-                q1 = new Question(question, a1, a2, a3, a4, answerNum); // instantiating question object
-                questionArray[i] = q1; // putting question object into question array
+                // creates a new question object in the array
+                questionArray[i] = new Question(question, a1, a2, a3, a4, answerNum); // instantiating question object
             }
+            // puts the first question into the window
+            questionField.setText(questionArray[0].getQuestion());
+            answerOne.setText(questionArray[0].getAnswer(1));
+            answerTwo.setText(questionArray[0].getAnswer(2));
+            answerThree.setText(questionArray[0].getAnswer(3));
+            answerFour.setText(questionArray[0].getAnswer(4));
+            
             
         } catch(FileNotFoundException e) {
             System.out.println("Error: " + e);
@@ -65,14 +98,63 @@ public class windowQuiz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        nextButton = new javax.swing.JButton();
+        questionField = new javax.swing.JTextField();
+        answerOne = new javax.swing.JRadioButton();
+        answerTwo = new javax.swing.JRadioButton();
+        answerThree = new javax.swing.JRadioButton();
+        answerFour = new javax.swing.JRadioButton();
+        previousButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        nextButton.setText("Next Question");
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                nextButtonActionPerformed(evt);
+            }
+        });
+
+        questionField.setEditable(false);
+        questionField.setText("questionField");
+        questionField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                questionFieldActionPerformed(evt);
+            }
+        });
+
+        answerOne.setText("jRadioButton1");
+        answerOne.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                answerOneActionPerformed(evt);
+            }
+        });
+
+        answerTwo.setText("jRadioButton2");
+        answerTwo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                answerTwoActionPerformed(evt);
+            }
+        });
+
+        answerThree.setText("jRadioButton3");
+        answerThree.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                answerThreeActionPerformed(evt);
+            }
+        });
+
+        answerFour.setText("jRadioButton4");
+        answerFour.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                answerFourActionPerformed(evt);
+            }
+        });
+
+        previousButton.setText("Previous Question");
+        previousButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previousButtonActionPerformed(evt);
             }
         });
 
@@ -81,38 +163,229 @@ public class windowQuiz extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(153, 153, 153)
-                .addComponent(jButton1)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(questionField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(answerFour)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(19, 19, 19))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(answerOne)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(previousButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 556, Short.MAX_VALUE)
+                                .addComponent(nextButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(answerTwo)
+                                    .addComponent(answerThree))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(145, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(132, 132, 132))
+                .addGap(20, 20, 20)
+                .addComponent(questionField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(answerOne, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(answerTwo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(answerThree, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(answerFour, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(previousButton)
+                    .addComponent(nextButton))
+                .addGap(10, 10, 10))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (windowResults == null) {
-            windowResults = new windowResults(this, menu);
+    // button to move to next question
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+        
+        // checks the user's anwser from the previous question and adds it to the userChoice array
+        if (answerOne.isSelected() == true) {
+            userChoices[index] = 1;
+        } else if (answerTwo.isSelected() == true) {
+            userChoices[index] = 2;
+        } else if (answerThree.isSelected() == true) {
+            userChoices[index] = 3;
+        } else if (answerFour.isSelected() == true) {
+            userChoices[index] = 4;
+        } 
+        
+        // if there are still questions
+        if (index < 9) {
+            // index for array goes up by 1
+            index += 1;                
+            // sets the new question and answers into the appropriate field
+            questionField.setText(questionArray[index].getQuestion());
+            answerOne.setText(questionArray[index].getAnswer(1));
+            answerTwo.setText(questionArray[index].getAnswer(2));
+            answerThree.setText(questionArray[index].getAnswer(3));
+            answerFour.setText(questionArray[index].getAnswer(4));
+            // now resets all the selected answers from the previous question
+            if (answerOne.isSelected()) {
+                answerOne.setSelected(false);
+            }
+            
+            if (answerTwo.isSelected()) {
+                answerTwo.setSelected(false);
+            }
+
+            if (answerThree.isSelected()) {
+                answerThree.setSelected(false);
+            }
+
+            if (answerFour.isSelected()) {
+                answerFour.setSelected(false);
+            }
+            // if there are no more questions left changes the button to results because it will now take you to results
+            if (index == 9) {
+                nextButton.setText("Results");
+            }
+            // if the there are no more questions takes you to the next window
+        } else {
+            index = 0;
+            if (windowResults == null) {
+                windowResults = new windowResults(this, menu);
+            }
+
+            windowResults.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_nextButtonActionPerformed
+
+    private void questionFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_questionFieldActionPerformed
+
+    private void answerOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answerOneActionPerformed
+        // if this button is selected all other buttons are deselected
+        if (answerTwo.isSelected()) {
+            answerTwo.setSelected(false);
         }
         
-    windowResults.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (answerThree.isSelected()) {
+            answerThree.setSelected(false);
+        }
+        
+        if (answerFour.isSelected()) {
+            answerFour.setSelected(false);
+        }
+    }//GEN-LAST:event_answerOneActionPerformed
 
-    
+    private void answerTwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answerTwoActionPerformed
+        // if this button is selected all other buttons are deselected
+        if (answerOne.isSelected()) {
+            answerOne.setSelected(false);
+        }
+        
+        if (answerThree.isSelected()) {
+            answerThree.setSelected(false);
+        }
+        
+        if (answerFour.isSelected()) {
+            answerFour.setSelected(false);
+        }
+    }//GEN-LAST:event_answerTwoActionPerformed
+
+    private void answerThreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answerThreeActionPerformed
+        // if this button is selected all other buttons are deselected
+        if (answerOne.isSelected()) {
+            answerOne.setSelected(false);
+        }
+        
+        if (answerTwo.isSelected()) {
+            answerTwo.setSelected(false);
+        }
+        
+        if (answerFour.isSelected()) {
+            answerFour.setSelected(false);
+        }
+    }//GEN-LAST:event_answerThreeActionPerformed
+
+    private void answerFourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answerFourActionPerformed
+        // if this button is selected all other buttons are deselected
+        if (answerOne.isSelected()) {
+            answerOne.setSelected(false);
+        }
+        
+        if (answerTwo.isSelected()) {
+            answerTwo.setSelected(false);
+        }
+        
+        if (answerThree.isSelected()) {
+            answerThree.setSelected(false);
+        }
+    }//GEN-LAST:event_answerFourActionPerformed
+
+    // button to go to previous question
+    private void previousButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousButtonActionPerformed
+        // if there are questions to return to
+        if (index > 0) {
+            // reduces the index by 1
+            index -= 1;
+            
+            // puts in the new question
+            questionField.setText(questionArray[index].getQuestion());
+            answerOne.setText(questionArray[index].getAnswer(1));
+            answerTwo.setText(questionArray[index].getAnswer(2));
+            answerThree.setText(questionArray[index].getAnswer(3));
+            answerFour.setText(questionArray[index].getAnswer(4));
+            
+            // unselects all selected answers from other questions
+            if (answerOne.isSelected()) {
+                answerOne.setSelected(false);
+            }
+            
+            if (answerTwo.isSelected()) {
+                answerTwo.setSelected(false);
+            }
+
+            if (answerThree.isSelected()) {
+                answerThree.setSelected(false);
+            }
+
+            if (answerFour.isSelected()) {
+                answerFour.setSelected(false);
+            }
+            
+            // puts back the users previous awnser from that question
+            if (userChoices[index] == 1) {
+                answerOne.setSelected(true);
+            } else if (userChoices[index] == 2) {
+                answerTwo.setSelected(true);
+            } else if (userChoices[index] == 3) {
+                answerThree.setSelected(true);
+            } else if (userChoices[index] == 4) {
+                answerFour.setSelected(true);
+            } 
+        }
+    }//GEN-LAST:event_previousButtonActionPerformed
+   
     /**
      * @param args the command line arguments
      */
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JRadioButton answerFour;
+    private javax.swing.JRadioButton answerOne;
+    private javax.swing.JRadioButton answerThree;
+    private javax.swing.JRadioButton answerTwo;
+    private javax.swing.JButton nextButton;
+    private javax.swing.JButton previousButton;
+    private javax.swing.JTextField questionField;
     // End of variables declaration//GEN-END:variables
 }
